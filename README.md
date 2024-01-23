@@ -1,2 +1,2 @@
-# AutoDRIVE-Simulator-Containerization
+# AutoDRIVE Simulator Containerization
 Containerization of AutoDRIVE Simulator
