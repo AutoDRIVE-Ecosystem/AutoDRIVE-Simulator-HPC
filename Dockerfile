@@ -21,13 +21,13 @@ RUN apt update \
   && chmod 0440 /etc/sudoers.d/$USERNAME \
   && rm -rf /var/lib/apt/lists/*
 
-RUN apt update && apt install -y nvidia-driver-525 nvidia-dkms-525
-
 RUN apt update && apt install -y \
     vulkan-tools \
+    libvulkan1 \
     libc++1 \
     libc++abi1
 
+COPY nvidia_icd.json /etc/vulkan/icd.d
 COPY AutoDRIVE_Simulator $HOME/AutoDRIVE_Simulator
 
 WORKDIR $HOME/AutoDRIVE_Simulator
