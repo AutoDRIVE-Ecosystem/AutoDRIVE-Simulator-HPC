@@ -11,5 +11,11 @@ In order to build a docker image for AutoDRIVE Simulator, run
 
 `docker build -t autodrive_simulator .`
 
-It is also assumed that the AutoDRIVE Simulator linux binary release has been copied to the same folder, before running the above command. 
+This will automatically pull the latest AutoDRIVE Simulator release version. To use a specific release version instead, use the VERSION command line argument. For instance, you may run
 
+`docker build -t autodrive_simulator . --build-arg VERSION=Simulator-0.2.0`
+
+For testing purposes, you may want to use a local version of AutoDRIVE Simulator, as opposed to pulling a release version from github. In this case, 
+update the Dockerfile with the folder name containing your AutoDRIVE Simulator application, and run 
+
+`docker build -t autodrive_simulator . --build-arg VERSION=local`
