@@ -1,0 +1,49 @@
+name: autodrive
+channels:
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1=main
+  - _openmp_mutex=5.1=1_gnu
+  - ca-certificates=2023.12.12=h06a4308_0
+  - ld_impl_linux-64=2.38=h1181459_1
+  - libffi=3.4.4=h6a678d5_0
+  - libgcc-ng=11.2.0=h1234567_1
+  - libgomp=11.2.0=h1234567_1
+  - libstdcxx-ng=11.2.0=h1234567_1
+  - ncurses=6.4=h6a678d5_0
+  - openssl=3.0.12=h7f8727e_0
+  - pip=23.3.1=py38h06a4308_0
+  - python=3.8.18=h955ad1f_0
+  - readline=8.2=h5eee18b_0
+  - setuptools=68.2.2=py38h06a4308_0
+  - sqlite=3.41.2=h5eee18b_0
+  - tk=8.6.12=h1ccaba5_0
+  - wheel=0.41.2=py38h06a4308_0
+  - xz=5.4.5=h5eee18b_0
+  - zlib=1.2.13=h5eee18b_0
+  - pip:
+      - bidict==0.22.1
+      - click==8.1.7
+      - dnspython==2.5.0
+      - eventlet==0.33.3
+      - flask==1.1.1
+      - flask-socketio==4.1.0
+      - gevent==21.1.2
+      - gevent-websocket==0.10.1
+      - greenlet==1.0.0
+      - h11==0.14.0
+      - itsdangerous==2.0.1
+      - jinja2==3.0.3
+      - markupsafe==2.1.4
+      - numpy==1.24.4
+      - opencv-contrib-python==4.9.0.80
+      - pillow==10.2.0
+      - python-engineio==3.13.0
+      - python-socketio==4.2.0
+      - simple-websocket==1.0.0
+      - six==1.16.0
+      - werkzeug==2.0.3
+      - wsproto==1.2.0
+      - zope-event==5.0
+      - zope-interface==6.1
+prefix: /home/gm/anaconda3/envs/autodrive
