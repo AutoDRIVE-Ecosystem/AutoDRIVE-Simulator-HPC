@@ -10,6 +10,8 @@ RUN apt-key adv --fetch-keys "https://developer.download.nvidia.com/compute/cuda
         nano \
         vim \
         sudo \
+        xvfb \
+        ffmpeg \
         curl \
         unzip \
         libvulkan1 \
