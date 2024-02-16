@@ -11,7 +11,7 @@ simulation_duration=$2
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 output_directory="$script_dir/output"
 
-# Create virtual display (:2) with screen resolution (1920x1080x24)
+# Create virtual display (:97) with screen resolution (1920x1080x24)
 Xvfb :97 -screen 0 1920x1080x24 &
 
 # Export the display environment variable to point to the virtual display
