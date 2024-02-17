@@ -7,7 +7,6 @@ if [ "$#" -ne 2 ]; then
 fi
 output_filename=$1
 simulation_duration=$2
-# Get the directory where the script is located
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 output_directory="$script_dir/output"
 
@@ -18,13 +17,13 @@ Xvfb :97 -screen 0 1920x1080x24 &
 export DISPLAY=:97
 
 # Launch the AutoDRIVE Simulator application with output directed to the virtual display
-./AutoDRIVE\ Simulator.x86_64 >/dev/null 2>&1 &
+$script_dir/AutoDRIVE\ Simulator.x86_64 >/dev/null 2>&1 &
 
 # Wait for a moment to ensure the simulator is properly launched
 sleep 5
 
 # Record video from the virtual display using ffmpeg and save it to a video file
-ffmpeg -f x11grab -video_size 1920x1080 -i :97 -t $simulation_duration -c:v libx264 -preset ultrafast -qp 0 "$output_directory/$output_filename"
+ffmpeg -f x11grab -video_size 1920x1080 -i :97 -t $simulation_duration -c:v libx265 -crf 28 -preset medium "$output_directory/$output_filename"
 
 # Inform user about the completion of the recording
 echo "Video recording completed and saved to $output_directory/$output_filename"
