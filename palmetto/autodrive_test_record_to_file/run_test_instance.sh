@@ -5,7 +5,7 @@ singularity instance start --nv -B $HOME,$TMPDIR /home/giovanm/autodrive_simulat
 
 echo "Launching AutoDRIVE Simulator and recording video to file..."
 cd /home/giovanm/autodrive_simulator_autoconnect_xvfb/home/AutoDRIVE_Simulator/
-singularity exec -B $HOME,$TMPDIR,/home/giovanm/autodrive_simulator_autoconnect_xvfb/home/AutoDRIVE_Simulator/output instance://inst1 bash ./record_simulation.sh output_$PBS_ARRAY_INDEX.mp4 120 >/home/giovanm/autodrive_test_record_to_file/sim_out_$PBS_ARRAY_INDEX.log 2>&1 &
+singularity exec -B $HOME,$TMPDIR,/home/giovanm/autodrive_simulator_autoconnect_xvfb/home/AutoDRIVE_Simulator/output instance://inst1 bash ./simulation_stream_recorder.sh record output_$PBS_ARRAY_INDEX.mp4 120 >/home/giovanm/autodrive_test_record_to_file/sim_out_$PBS_ARRAY_INDEX.log 2>&1 &
 
 echo "Waiting for 20 seconds before running the python server..."
 sleep 20
