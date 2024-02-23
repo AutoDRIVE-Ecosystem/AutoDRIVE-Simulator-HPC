@@ -45,10 +45,10 @@ RUN cd /home && \
 # Note: The above COPY instruction should be uncommented if you want to copy
 # from a local path into the Docker image.
 
-COPY record_simulation.sh /home/AutoDRIVE_Simulator/record_simulation.sh
+COPY simulation_stream_recorder.sh /home/AutoDRIVE_Simulator/simulation_stream_recorder.sh
 RUN mkdir /home/AutoDRIVE_Simulator/output
 
 WORKDIR /home/AutoDRIVE_Simulator
 RUN chmod +x /home/AutoDRIVE_Simulator/AutoDRIVE\ Simulator.x86_64
-RUN chmod +x /home/AutoDRIVE_Simulator/record_simulation.sh
+RUN chmod +x /home/AutoDRIVE_Simulator/simulation_stream_recorder.sh
 
