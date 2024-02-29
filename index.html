@@ -1,24 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Live Cam</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoDRIVE WebViewer</title>
+  <link rel="icon" type="image/png" href="images/AutoDRIVE-Logo.png"/>
+  <link rel="stylesheet" href="style.css"> <!-- Link to the external CSS file -->
 </head>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <body>
-  <video id="video" autoplay="true" controls="controls" type='application/x-mpegURL'></video>
-  <script>
-    if (Hls.isSupported()) {
-      var video = document.getElementById('video');
-      var hls = new Hls();
-      // bind them together
-      hls.attachMedia(video);
-      hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-        console.log("video and hls.js are now bound together !");
-        hls.loadSource("output_1.m3u8");
-        hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-        });
-      });
-    }
-  </script>
+  <img src="images/AutoDRIVE-Banner.jpg" alt="AutoDRIVE Banner" class="banner-image">
+  <h1>AutoDRIVE Simulator WebViewer</h1>
+  <div id="videoGrid" class="video-grid"></div>
+  <div class="footer">
+    <img src="images/Institution-CUICAR.png" alt="CUICAR Logo" class="footer-logo">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="loadStreams.js"></script>
 </body>
 </html>
