@@ -16,7 +16,7 @@ script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 output_directory="$script_dir/output"
 
 # Create virtual display (:97) with screen resolution (1920x1080x24)
-Xvfb :97 -screen 0 1920x1080x24 &
+Xvfb :97 -screen 0 600x400x24 &
 
 # Export the display environment variable to point to the virtual display
 export DISPLAY=:97
@@ -43,7 +43,9 @@ case $mode in
             exit 1
         fi
         # Stream to HLS using ffmpeg (assuming output_filename is the base name for the HLS playlist)
-        ffmpeg -f x11grab -video_size 640x480 -i :97 -c:v libx264 -crf 21 -preset veryfast -f hls "$output_directory/$output_filename.m3u8"
+        ffmpeg -f x11grab -s 600x400 -i :97 -c:v libx264 -preset ultrafast -f hls -hls_time 10 -hls_list_size 0 -hls_segment_filename "$output_directory/$output_filename.%03d.ts" "$output_directory/$output_filename.m3u8" &
+
+
         echo "Streaming started and available at $output_directory/$output_filename.m3u8"
         ;;
     *)
