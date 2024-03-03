@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const videoGrid = document.getElementById('videoGrid');
 
   // Number of columns for the desired fixed grid layout
-  const cols = 4; 
+  const cols = 3; 
 
   // Calculate the grid width
   const streamBoxWidth = 260; // Width in pixels for each stream box
@@ -18,22 +18,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Define an array with all the stream URLs (add 'http://...' if needed)
   const streamUrls = [
-    'output_1.m3u8',
-    'output_2.m3u8',
-    'output_3.m3u8',
-    'output_4.m3u8',
-    'output_5.m3u8',
-    'output_6.m3u8',
-    'output_7.m3u8',
-    'output_1.m3u8',
-    'output_2.m3u8',
-    'output_3.m3u8',
-    'output_4.m3u8',
-    'output_5.m3u8',
-    'output_6.m3u8',
-    'output_7.m3u8',
-    'output_7.m3u8',
-    'output_8.m3u8'
+    'http://10.128.199.51:31991/stream/0/output.m3u8',
+    'http://10.128.199.51:31991/stream/1/output.m3u8',
+    'http://10.128.199.51:31991/stream/2/output.m3u8',
+    'http://10.128.199.51:31991/stream/3/output.m3u8',
+    'http://10.128.199.51:31991/stream/4/output.m3u8',
+    'http://10.128.199.51:31991/stream/5/output.m3u8',
+    'http://10.128.199.51:31991/stream/6/output.m3u8',
+    'http://10.128.199.51:31991/stream/7/output.m3u8',
+    'http://10.128.199.51:31991/stream/8/output.m3u8',
   ];
 
   // Function to add a stream to the grid
