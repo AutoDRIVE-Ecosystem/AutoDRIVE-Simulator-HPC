@@ -1,21 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   const videoGrid = document.getElementById('videoGrid');
 
-  // Number of columns for the desired fixed grid layout
-  const cols = 4; 
-
-  // Calculate the grid width
-  const streamBoxWidth = 260; // Width in pixels for each stream box
-  const gridGap = 10; 
-  const totalGridWidth = cols * streamBoxWidth + (cols - 1) * gridGap;
-
-  // Adjust the .video-grid container to control its width and centering
-  videoGrid.style.maxWidth = `${totalGridWidth}px`;
-  videoGrid.style.margin = 'auto';
-  videoGrid.style.display = 'grid';
-  videoGrid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-  videoGrid.style.gridGap = `${gridGap}px`;
-
   // Fetch stream URLs from the JSON config file asynchronously
   fetch('./config.json')
     .then(response => response.json())
