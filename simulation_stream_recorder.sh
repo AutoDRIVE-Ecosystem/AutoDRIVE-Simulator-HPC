@@ -15,8 +15,8 @@ simulation_duration=$3
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 output_directory="$script_dir/output"
 
-# Create virtual display (:97) with screen resolution (1920x1080x24)
-Xvfb :97 -screen 0 600x400x24 &
+# Create virtual display (:97) 
+Xvfb :97 -screen 0 640x360x24 &
 
 # Export the display environment variable to point to the virtual display
 export DISPLAY=:97
@@ -34,7 +34,7 @@ case $mode in
             exit 1
         fi
         # Record video from the virtual display using ffmpeg and save it to a video file
-        ffmpeg -f x11grab -video_size 1920x1080 -i :97 -t $simulation_duration -c:v libx265 -crf 28 -preset medium "$output_directory/$output_filename"
+        ffmpeg -f x11grab -video_size 640x360 -i :97 -t $simulation_duration -c:v libx265 -crf 28 -preset medium "$output_directory/$output_filename"
         echo "Video recording completed and saved to $output_directory/$output_filename"
         ;;
     stream)
@@ -43,7 +43,7 @@ case $mode in
             exit 1
         fi
         # Stream to HLS using ffmpeg (assuming output_filename is the base name for the HLS playlist)
-        ffmpeg -f x11grab -s 600x400 -i :97 -c:v libx264 -preset ultrafast -f hls -hls_time 10 -hls_list_size 0 -hls_segment_filename "$output_directory/$output_filename.%03d.ts" "$output_directory/$output_filename.m3u8" &
+        ffmpeg -f x11grab -s 640x360 -i :97 -c:v libx264 -preset ultrafast -f hls -hls_time 10 -hls_list_size 0 -hls_segment_filename "$output_directory/$output_filename.%03d.ts" "$output_directory/$output_filename.m3u8" &
 
 
         echo "Streaming started and available at $output_directory/$output_filename.m3u8"
@@ -54,5 +54,3 @@ case $mode in
         exit 1
         ;;
 esac
-
-# Exit the
