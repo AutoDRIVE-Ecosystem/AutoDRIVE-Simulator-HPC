@@ -16,70 +16,61 @@ document.addEventListener('DOMContentLoaded', function() {
   videoGrid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
   videoGrid.style.gridGap = `${gridGap}px`;
 
-  // Define an array with all the stream URLs (add 'http://...' if needed)
-  const streamUrls = [
-    'output_1.m3u8',
-    'output_2.m3u8',
-    'output_3.m3u8',
-    'output_4.m3u8',
-    'output_5.m3u8',
-    'output_6.m3u8',
-    'output_7.m3u8',
-    'output_1.m3u8',
-    'output_2.m3u8',
-    'output_3.m3u8',
-    'output_4.m3u8',
-    'output_5.m3u8',
-    'output_6.m3u8',
-    'output_7.m3u8',
-    'output_7.m3u8',
-    'output_8.m3u8'
-  ];
+  // Fetch stream URLs from the JSON config file asynchronously
+  fetch('./config.json')
+    .then(response => response.json())
+    .then(data => {
+      const streams = data.streams;
 
-  // Function to add a stream to the grid
-  function addStreamToGrid(streamUrl, index) {
-    const streamBox = document.createElement('div');
-    streamBox.className = 'stream-box';
+      // Function to add a stream to the grid
+      function addStreamToGrid(stream, index) {
+        const streamBox = document.createElement('div');
+        streamBox.className = 'stream-box';
 
-    const title = document.createElement('div');
-    title.className = 'stream-title';
-    title.textContent = `Simulation #${index + 1}`;
-    streamBox.appendChild(title);
+        const title = document.createElement('div');
+        title.className = 'stream-title';
+        title.textContent = `Simulation #${index + 1}` + 
+          (stream.description ? 
+            (stream.description.length <= 17 ? ` - ${stream.description}` : ` - ${stream.description.substring(0, 15)}...`) : 
+            '');
+        streamBox.appendChild(title);
 
-    const videoWrapper = document.createElement('div');
-    videoWrapper.className = 'video-wrapper';
+        const videoWrapper = document.createElement('div');
+        videoWrapper.className = 'video-wrapper';
 
-    const video = document.createElement('video');
-    video.controls = true;
-    video.autoplay = true;
-    video.muted = true;
-    video.loop = true;
+        const video = document.createElement('video');
+        video.controls = true;
+        video.autoplay = true;
+        video.muted = true;
+        video.loop = true;
 
-    videoWrapper.appendChild(video);
-    streamBox.appendChild(videoWrapper);
-    videoGrid.appendChild(streamBox);
+        videoWrapper.appendChild(video);
+        streamBox.appendChild(videoWrapper);
+        videoGrid.appendChild(streamBox);
 
-    return {streamBox, video};
-  }
+        return {streamBox, video};
+      }
 
-  // Create and load the streams
-  streamUrls.forEach((streamUrl, index) => {
-    const { video } = addStreamToGrid(streamUrl, index);
+      // Create and load the streams
+      streams.forEach((stream, index) => {
+        const { video } = addStreamToGrid(stream, index);
 
-    fetch(streamUrl, { method: 'HEAD' })
-      .then(response => {
-        if (response.ok) {
-          if (Hls.isSupported()) {
-            const hls = new Hls();
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-              hls.loadSource(streamUrl);
-            });
-          } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = streamUrl;
-          }
-        }
-      })
-      .catch(error => console.error(`Error fetching stream ${streamUrl}:`, error));
-  });
+        fetch(stream.url, { method: 'HEAD' })
+          .then(response => {
+            if (response.ok) {
+              if (Hls.isSupported()) {
+                const hls = new Hls();
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+                  hls.loadSource(stream.url);
+                });
+              } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = stream.url;
+              }
+            }
+          })
+          .catch(error => console.error(`Error fetching stream ${stream.url}:`, error));
+      });
+    })
+    .catch(error => console.error("Failed to load config.json:", error));
 });

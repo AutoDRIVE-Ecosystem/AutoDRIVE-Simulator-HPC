@@ -1,0 +1,21 @@
+{
+    "streams": [
+      {"url": "output_1.m3u8", "description": "Sunny, 6am "},
+      {"url": "output_2.m3u8", "description": "Sunny, 12pm"},
+      {"url": "output_3.m3u8", "description": "Sunny, 6pm "},
+      {"url": "output_4.m3u8", "description": "Sunny, 9pm "},
+      {"url": "output_5.m3u8", "description": "Cloudy, 6am "},
+      {"url": "output_6.m3u8", "description": "Cloudy, 12pm"},
+      {"url": "output_7.m3u8", "description": "Cloudy, 6pm "},
+      {"url": "output_1.m3u8", "description": "Cloudy, 9pm "},
+      {"url": "output_2.m3u8", "description": "Rainy, 6am "},
+      {"url": "output_3.m3u8", "description": "Rainy, 12pm"},
+      {"url": "output_4.m3u8", "description": "Rainy, 6pm "},
+      {"url": "output_5.m3u8", "description": "Rainy, 9pm "},
+      {"url": "output_6.m3u8", "description": "Foggy, 6am "},
+      {"url": "output_7.m3u8", "description": "Foggy, 12pm"},
+      {"url": "output_7.m3u8", "description": "Foggy, 6pm "},
+      {"url": "output_8.m3u8", "description": "Foggy, 9pm "}
+    ]
+  }
+  
