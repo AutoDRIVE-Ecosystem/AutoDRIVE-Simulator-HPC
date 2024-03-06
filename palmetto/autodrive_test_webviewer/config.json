@@ -1,0 +1,21 @@
+{
+    "streams": [
+      {"url": "output_1.m3u8",  "description": "Sunny, 9am "},
+      {"url": "output_2.m3u8",  "description": "Sunny, 12pm"},
+      {"url": "output_3.m3u8",  "description": "Sunny, 3pm "},
+      {"url": "output_4.m3u8",  "description": "Sunny, 6pm "},
+      {"url": "output_5.m3u8",  "description": "Light Fog, 9am "},
+      {"url": "output_6.m3u8",  "description": "Light Fog, 12pm"},
+      {"url": "output_7.m3u8",  "description": "Light Fog, 3pm "},
+      {"url": "output_8.m3u8",  "description": "Light Fog, 6pm "},
+      {"url": "output_9.m3u8",  "description": "Heavy Rain, 9am "},
+      {"url": "output_10.m3u8", "description": "Heavy Rain, 12pm"},
+      {"url": "output_11.m3u8", "description": "Heavy Rain, 3pm "},
+      {"url": "output_12.m3u8", "description": "Heavy Rain, 6pm "},
+      {"url": "output_13.m3u8", "description": "Heavy Snow, 9am "},
+      {"url": "output_14.m3u8", "description": "Heavy Snow, 12pm"},
+      {"url": "output_15.m3u8", "description": "Heavy Snow, 3pm "},
+      {"url": "output_16.m3u8", "description": "Heavy Snow, 6pm "}
+    ]
+  }
+  
