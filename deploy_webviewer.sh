@@ -4,7 +4,7 @@
 module add anaconda3/2022.05-gcc/9.5.0
 
 # http server target directory
-TARGET_DIR="/home/giovanm/autodrive_simulator_autoconnect_xvfb/home/AutoDRIVE_Simulator/output"
+TARGET_DIR="/home/giovanm/autodrive_simulator_autoconnect_weather_time/home/AutoDRIVE_Simulator/output"
 
 # Copy index.html to the target directory, replacing it if it exists
 cp -f -r index.html loadStreams.js config.json style.css images "$TARGET_DIR"
