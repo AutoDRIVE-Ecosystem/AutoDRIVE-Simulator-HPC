@@ -27,6 +27,8 @@ if sim_inst_ID < 1 or sim_inst_ID > 16:
     sys.exit(1)
 
 # Define weather and time-of-day for each simulation instance
+#     time_of_day: [minutes in 24 hour format] (only used if auto_time==False)
+#     weather_id: [0=Custom, 1=Sunny, 2=Cloudy, 3=LightFog, 4=HeavyFog, 5=LightRain, 6=HeavyRain, 7=LightSnow, 8=HeavySnow]
 if sim_inst_ID == 1:
     weather_id = 1  # Sunny
     time_of_day = 540  # 9am
@@ -186,13 +188,11 @@ def bridge(sid, data):
 
         # Environmental conditions
         environment.auto_time = "False"  # ["False", "True"]
-        # environment.time_scale = 600 # [0, inf) (only used if auto_time==True)
-        # environment.time_of_day = 720 #560 # [minutes in 24 hour format] (only used if auto_time==False)
-        # environment.weather_id = 2 # [0=Custom, 1=Sunny, 2=Cloudy, 3=LightFog, 4=HeavyFog, 5=LightRain, 6=HeavyRain, 7=LightSnow, 8=HeavySnow]
-        # environment.cloud_intensity = 0.0 # [0, 1] (only used if weather_id==0)
-        # environment.fog_intensity = 0.0 # [0, 1] (only used if weather_id==0)
-        # environment.rain_intensity = 0.0 # [0, 1] (only used if weather_id==0)
-        # environment.snow_intensity = 0.0 # [0, 1] (only used if weather_id==0)
+        environment.time_scale = 600 # [0, inf) (only used if auto_time==True)
+        environment.cloud_intensity = 0.0 # [0, 1] (only used if weather_id==0)
+        environment.fog_intensity = 0.0 # [0, 1] (only used if weather_id==0)
+        environment.rain_intensity = 0.0 # [0, 1] (only used if weather_id==0)
+        environment.snow_intensity = 0.0 # [0, 1] (only used if weather_id==0)
         environment.weather_id = weather_id
         environment.time_of_day = time_of_day
 
