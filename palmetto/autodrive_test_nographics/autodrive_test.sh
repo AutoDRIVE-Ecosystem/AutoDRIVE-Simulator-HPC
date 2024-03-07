@@ -8,7 +8,7 @@
 #PBS -j oe
 
 export TEST_DIR=/home/giovanm/autodrive_test_nographics/
-export SIMULATOR_DIR=/home/giovanm/autodrive_simulator_autoconnect_weather_time/
+export SIMULATOR_DIR=/home/giovanm/autodrive_autoconnect/
 export XDG_RUNTIME_DIR=/tmp/runtime-dir
 
 # Activate the autodrive conda environment
