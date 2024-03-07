@@ -8,6 +8,7 @@ echo "Waiting for 20 seconds before running the python server..."
 sleep 20
 
 echo "Running the python server..."
-python -u $TEST_DIR/opencav_aeb.py
+cd $TEST_DIR
+python -u opencav_aeb.py
 
 echo "Done"
