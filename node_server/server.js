@@ -43,7 +43,8 @@ function performDnsLookup(domain) {
     return new Promise((resolve, reject) => {
         dns.lookup(domain, options, (err, address) => {
             if (err) {
-                return reject(err);
+                console.log(err)
+                return reject([]);
             }
             return resolve(address)
         })
@@ -61,9 +62,11 @@ function performDnsLookup(domain) {
     // });
 }
 
+var podips
+
 function server_init(address) {
 
-    var podips = address;
+    podips = address;
     console.log("podips: " + podips);
     app.use('/stream', function(req, res, next) {
 
@@ -93,8 +96,13 @@ function server_init(address) {
 
 }
 
+let counter = 0;
 
-
+app.get('/weather', (req, res) => {
+    counter++;
+    console.log("weather request: " + counter)
+    res.json({ weatherid: counter });
+});
 
 app.get('/dns-lookup', (req, res) => {
     const domain = "sim-gateway";
@@ -115,6 +123,19 @@ app.get('/dns-lookup', (req, res) => {
         });
 });
 
+app.post('/reset', (req, res) => {
+
+    console.log("Resetting stored video streams...")
+
+    // reset server side IPs
+    var newPromise = performDnsLookup("sim-gateway")
+
+    newPromise.then(
+        function(address) {podips=address; console.log(podips); res.json({"reset": true})},
+        function(error) {console.log(error); res.json({"reset": false});}
+    )
+
+});
 const podipsPromise = performDnsLookup("sim-gateway")
 
 podipsPromise.then(

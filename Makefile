@@ -22,3 +22,6 @@ build-frontend:
 	docker build --platform=linux/amd64 -f webviewer.Dockerfile -t registry.rcd.clemson.edu/viprgs_v_n_v/hpc_cloud_solutions/webviewer:latest . && \
 		docker push registry.rcd.clemson.edu/viprgs_v_n_v/hpc_cloud_solutions/webviewer:latest && \
 		kubectl -n carla-test delete pod $$(kubectl -n carla-test get pods -l=app=webapp -o jsonpath="{.items[*].metadata.name}")
+
+clean:
+	docker image prune

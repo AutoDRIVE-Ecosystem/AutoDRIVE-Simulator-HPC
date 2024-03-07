@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const videoGrid = document.getElementById('videoGrid');
 
   // Number of columns for the desired fixed grid layout
-  const cols = 3; 
+  const cols = 4; 
 
   // Calculate the grid width
   const streamBoxWidth = 260; // Width in pixels for each stream box
@@ -27,6 +27,13 @@ document.addEventListener('DOMContentLoaded', function() {
     'http://10.128.199.51:31991/stream/6/output.m3u8',
     'http://10.128.199.51:31991/stream/7/output.m3u8',
     'http://10.128.199.51:31991/stream/8/output.m3u8',
+    'http://10.128.199.51:31991/stream/9/output.m3u8',
+    'http://10.128.199.51:31991/stream/10/output.m3u8',
+    'http://10.128.199.51:31991/stream/11/output.m3u8',
+    'http://10.128.199.51:31991/stream/12/output.m3u8',
+    'http://10.128.199.51:31991/stream/13/output.m3u8',
+    'http://10.128.199.51:31991/stream/14/output.m3u8',
+    'http://10.128.199.51:31991/stream/15/output.m3u8'
   ];
 
   // Function to add a stream to the grid

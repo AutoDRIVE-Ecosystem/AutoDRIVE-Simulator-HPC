@@ -16,5 +16,16 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script src="loadStreams.js"></script>
+  <script>
+
+    function resetServer() {
+
+      const url = "http://10.128.199.51:31991/reset"
+      fetch(url, {method: "POST"})
+
+    }
+
+  </script>
+  <button onclick="resetServer()">Reload Video Feed</button>
 </body>
 </html>
