@@ -98,10 +98,30 @@ function server_init(address) {
 
 let counter = 0;
 
+// Array to hold demo parameters
+const weather_params = [
+    { "time": 0, "cloud": 0, "fog": 0, "rain": 0, "snow": 0}, // Case 0, Midnight clear
+    { "time": 360, "cloud": 0, "fog": 0, "rain": 0, "snow": 0}, // Case 1, Dawn clear
+    { "time": 720, "cloud": 0, "fog": 0, "rain": 0, "snow": 0}, // Case 2, Mid Day clear
+    { "time": 1080, "cloud": 0, "fog": 0, "rain": 0, "snow": 0}, // Case 3, Dusk clear
+    { "time": 0, "cloud": 1, "fog": 0, "rain": 0, "snow": 0}, // Case 4, Midnight cloudy
+    { "time": 360, "cloud": 1, "fog": 0, "rain": 0, "snow": 0}, // Case 5, Mid Day cloudy
+    { "time": 720, "cloud": 0, "fog": 1, "rain": 0, "snow": 0}, // Case 6, Dawn foggy
+    { "time": 1080, "cloud": 0, "fog": 1, "rain": 0, "snow": 0}, // Case 7, Dusk foggy
+    { "time": 0, "cloud": 0, "fog": 0, "rain": 1, "snow": 0}, // Case 8, Midnight heavy rain
+    { "time": 360, "cloud": 0, "fog": 0, "rain": 0.5, "snow": 0}, // Case 9, Dawn mild rain
+    { "time": 720, "cloud": 0, "fog": 0, "rain": 1, "snow": 0}, // Case 10, Mid day heavy rain
+    { "time": 1080, "cloud": 0, "fog": 0, "rain": 0.5, "snow": 0}, // Case 11, Dusk milkd rain
+    { "time": 0, "cloud": 0, "fog": 0, "rain": 0, "snow": 1}, // Case 12, Midnight heavy snow
+    { "time": 360, "cloud": 0, "fog": 0, "rain": 0, "snow": 0.5}, // Case 13, Dawn mild snow
+    { "time": 720, "cloud": 0, "fog": 0, "rain": 0, "snow": 1}, // Case 14, Mid Day heavy snow
+    { "time": 1080, "cloud": 0, "fog": 0, "rain": 0, "snow": 0.5}, // Case 15, Dusk mild snow
+]
+
 app.get('/weather', (req, res) => {
     counter++;
     console.log("weather request: " + counter)
-    res.json({ weatherid: counter });
+    res.json({ "weather_config": weather_params[counter % weather_params.length] });
 });
 
 app.get('/dns-lookup', (req, res) => {
