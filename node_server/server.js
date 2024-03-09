@@ -4,7 +4,8 @@ const multer = require('multer')
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-const { createProxyMiddleware } = require('http-proxy-middleware')
+const { createProxyMiddleware } = require('http-proxy-middleware');
+const { config } = require('process');
 
 const app = express();
 const port = 3000;
@@ -32,6 +33,10 @@ const weather_ids = [1, 2, 3, 4, 5, 6, 7, 8];
 const times = [[0, 360], [720, 1080]];
 const models = ["yolov2", "yolov2-tiny", "yolov3", "yolov3-tiny"]
 
+// Simulation Condition selection parameter needed
+// Iterate through times[0-1] and model[0-4] for 8 conditions
+
+
 var counter = 0;
 
 var config_arr = []
@@ -49,6 +54,19 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 //     return options;
 // });
 
+var simultation_condition_iter = 0;
+
+app.post('/iterate_simulation_conditions', (req, res) => {
+
+    // generate new configs with new variables & update config_arr
+    simultation_condition_iter++;
+    config_arr = generate_config(weather_ids, times[simultation_condition_iter % times.length], models[simultation_condition_iter % models.length]);
+    console.log("Iterated simulation conditions to: Time=" + times[simultation_condition_iter % times.length] + " and model = " +  models[simultation_condition_iter % models.length]);
+
+    res.json("Stored simulation conditions iterated.");
+
+});
+
 function performDnsLookup(domain) {
 
     const options = {
@@ -56,17 +74,6 @@ function performDnsLookup(domain) {
         all: true
 
     }
-
-    // dns.lookup(domain, options, (err, value) => {
-    //     if (err) {
-    //         console.log(err)
-    //     } else {
-    //         console.log(value);
-    //     }
-    
-    // return value.address;
-
-    // });
 
     return new Promise((resolve, reject) => {
         dns.lookup(domain, options, (err, address) => {
@@ -78,34 +85,31 @@ function performDnsLookup(domain) {
         })
     })
 
-    // return new Promise((resolve, reject) => {
-    //     dns.lookup(domain, options, (err, value) => {
-    //         if (err) {
-    //             reject(err);
-    //         } else {
-    //             console.log(value);
-    //             resolve({ domain, value });
-    //         }
-    //     });
-    // });
 }
 
 var podips
 
 function generate_config(weathers, times, model) {
 
-    config = []
+    config_arr = []
 
     for (let i = 0; i < weathers.length; i++) {
         for (let j = 0; j < times.length; j++) {
-            console.log("parsing: time:" + times[j] + " weather: " + weathers[i] + " model: " + model)
-            config.push({"time": times[j], "weather": weathers[i], "model": model});
+            //console.log("parsing: time:" + times[j] + " weather: " + weathers[i] + " model: " + model)
+            config_arr.push({"time": times[j], "weather": weathers[i], "model": model});
         }
     }
 
-    console.log("Generated config: weather[0]" + config[0]["weather"]);
-    return config
+    console.log("Generated config.");
+    print_config(config_arr)
+    return config_arr
 
+}
+
+function print_config(config_arr) {
+    for(let i = 0; i < config_arr.length; i++) {
+        console.log("time: " + config_arr[i]["time"] + " weather_id: " + config_arr[i]["weather"] + " model: " + config_arr[i]["model"])
+    }
 }
 
 async function server_init(address) {
@@ -143,37 +147,12 @@ async function server_init(address) {
 
 }
 
-
-
-
-
-// // Array to hold demo parameters
-// const weather_params = [
-//     { "time": 0, "cloud": 0, "fog": 0, "rain": 0, "snow": 0}, // Case 0, Midnight clear
-//     { "time": 360, "cloud": 0, "fog": 0, "rain": 0, "snow": 0}, // Case 1, Dawn clear
-//     { "time": 720, "cloud": 0, "fog": 0, "rain": 0, "snow": 0}, // Case 2, Mid Day clear
-//     { "time": 1080, "cloud": 0, "fog": 0, "rain": 0, "snow": 0}, // Case 3, Dusk clear
-//     { "time": 0, "cloud": 1, "fog": 0, "rain": 0, "snow": 0}, // Case 4, Midnight cloudy
-//     { "time": 360, "cloud": 1, "fog": 0, "rain": 0, "snow": 0}, // Case 5, Mid Day cloudy
-//     { "time": 720, "cloud": 0, "fog": 1, "rain": 0, "snow": 0}, // Case 6, Dawn foggy
-//     { "time": 1080, "cloud": 0, "fog": 1, "rain": 0, "snow": 0}, // Case 7, Dusk foggy
-//     { "time": 0, "cloud": 0, "fog": 0, "rain": 1, "snow": 0}, // Case 8, Midnight heavy rain
-//     { "time": 360, "cloud": 0, "fog": 0, "rain": 0.5, "snow": 0}, // Case 9, Dawn mild rain
-//     { "time": 720, "cloud": 0, "fog": 0, "rain": 1, "snow": 0}, // Case 10, Mid day heavy rain
-//     { "time": 1080, "cloud": 0, "fog": 0, "rain": 0.5, "snow": 0}, // Case 11, Dusk milkd rain
-//     { "time": 0, "cloud": 0, "fog": 0, "rain": 0, "snow": 1}, // Case 12, Midnight heavy snow
-//     { "time": 360, "cloud": 0, "fog": 0, "rain": 0, "snow": 0.5}, // Case 13, Dawn mild snow
-//     { "time": 720, "cloud": 0, "fog": 0, "rain": 0, "snow": 1}, // Case 14, Mid Day heavy snow
-//     { "time": 1080, "cloud": 0, "fog": 0, "rain": 0, "snow": 0.5}, // Case 15, Dusk mild snow
-// ]
-
-
-
 app.get('/variabilityconfig', (req, res) => {
 
     counter++;
     console.log("config request: " + counter);
-    res.json({ "config": config_arr[ counter % podips.length ]});
+    // res.json({ "config": config_arr[ counter % podips.length ]});
+    res.json({ "config": config_arr[ counter % 16 ]});
 
 });
 
@@ -240,7 +219,6 @@ app.post('/resetdatabase', (req, res) => {
     res.json("Database Reset.")
 
 })
-
   
 app.post('/reset', (req, res) => {
 
@@ -255,9 +233,10 @@ app.post('/reset', (req, res) => {
     )
 
 });
+
 const podipsPromise = performDnsLookup("sim-gateway")
 
 podipsPromise.then(
     function(address) {server_init(address);},
-    function(error) {console.log(error);}
+    function(error) {console.log(error);server_init([]);}
 );
