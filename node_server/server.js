@@ -1,17 +1,37 @@
 const express = require('express');
 const dns = require('dns');
-
+const multer = require('multer')
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const { createProxyMiddleware } = require('http-proxy-middleware')
 
 const app = express();
 const port = 3000;
 
+// Use the multer middleware to handle file uploads
+// const storage = multer.memoryStorage(); // Use memory storage for simplicity
 
+// Old code for direct csv file transfer
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//       // Specify the destination folder where the file will be saved
+//       cb(null, 'uploads/');
+//     },
+//     filename: (req, file, cb) => {
+//       // Specify the filename (you can also use a library like uuid to generate a unique filename)
+//       cb(null, file.originalname);
+//     }
+//   });
+
+// const upload = multer({ storage: storage });
+
+var database = [] // Array for storing sent metrics
 
 app.use(cors());
-
+// Use middleware to parse JSON and URL-encoded data
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 // Not sure why this isn't working --> keep getting error saying I am missing a target option.
 
@@ -143,6 +163,52 @@ app.get('/dns-lookup', (req, res) => {
         });
 });
 
+app.get('/collectdata', (req, res) => {
+
+    console.log("Sending data from server...");
+    res.json(data=database);
+
+});
+
+// Define the /database endpoint to handle file uploads
+app.post('/database', (req, res) => {
+
+    var metric_data = req.body.data;
+
+    if (!metric_data) {
+        return res.status(400).send('No data found.');
+    }
+
+    console.log("Metric Data received: \n");
+    // console.log(metric_data);
+    database.push(metric_data);
+
+    res.send('Metrics received.');
+
+    // Old code for direct csv file transfer
+    // const file = req.file;
+    
+    // console.log(file)
+    // database.push(file)
+
+    // if (!file) {
+    //   return res.status(400).send('No file uploaded.');
+    // }
+  
+    // // Process the file (e.g., save it to disk or perform other operations)
+    // // For now, just send a success response
+    // res.send('File uploaded successfully.');
+  });
+
+app.post('/resetdatabase', (req, res) => {
+    
+    console.log("Resetting Database")
+    database = []
+    res.json("Database Reset.")
+
+})
+
+  
 app.post('/reset', (req, res) => {
 
     console.log("Resetting stored video streams...")
