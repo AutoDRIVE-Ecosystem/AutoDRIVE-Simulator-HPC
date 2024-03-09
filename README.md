@@ -1,4 +1,4 @@
-# AutoDRIVE Simulator Containerization
+# AutoDRIVE Simulator: OpenCAV AEB Function
 
 This branch hosts the necessary codebase to run a parameter sweep for verification and validation (V&V) of autonomous emergency braking (AEB) functionality of the [OpenCAV digital twin](https://youtu.be/YIZz_8rLgZQ) using [AutoDRIVE Simulator](https://youtu.be/t0CgNR_LgrQ).
 
