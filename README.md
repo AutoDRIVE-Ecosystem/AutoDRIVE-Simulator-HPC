@@ -65,7 +65,7 @@ This branch, in conjunction with others such as the [palmetto](https://github.co
 ## USAGE
 
 1. Download, unzip and launch the AutoDRIVE Simulator by referring to the detailed instructions given [here](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE/tree/AutoDRIVE-Simulator?tab=readme-ov-file#download-and-run):
-   - Download the latest release of the standalone application of AutoDRIVE Simulator for RZR AEB scenario from [here]().
+   - Download the latest release of the standalone application of AutoDRIVE Simulator for RZR AEB scenario from [here](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/releases/download/rzr-aeb-0.1.0/AutoDRIVE.Simulator.zip).
    - Set the execution rights of the standalone application:
      ```bash
      $ cd <path/to/AutoDRIVE Simulator.x86_64>
