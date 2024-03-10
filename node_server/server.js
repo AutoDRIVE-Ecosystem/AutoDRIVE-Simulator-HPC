@@ -31,7 +31,7 @@ var database = [] // Array for storing sent metrics
 
 const weather_ids = [1, 2, 3, 4, 5, 6, 7, 8];
 const times = [[0, 360], [720, 1080]];
-const models = ["yolov2", "yolov2-tiny", "yolov3", "yolov3-tiny"]
+const models = ["yolov2", "yolov2", "yolov2-tiny", "yolov2-tiny", "yolov3", "yolov3", "yolov3-tiny", "yolov3-tiny"]
 
 // Simulation Condition selection parameter needed
 // Iterate through times[0-1] and model[0-4] for 8 conditions
