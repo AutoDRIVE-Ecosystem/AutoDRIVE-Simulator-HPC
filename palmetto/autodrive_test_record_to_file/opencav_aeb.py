@@ -4,9 +4,13 @@
 import sys
 import socketio
 import eventlet
-from flask import Flask
-import numpy as np
 import cv2
+import csv
+import json 
+import numpy as np
+from datetime import datetime
+from flask import Flask
+
 import autodrive
 
 ################################################################################
@@ -26,64 +30,51 @@ if sim_inst_ID < 1 or sim_inst_ID > 16:
     print("Usage: python opencav_aeb.py <sim_inst_ID>")
     sys.exit(1)
 
-# Define weather and time-of-day for each simulation instance
-#     time_of_day: [minutes in 24 hour format] (only used if auto_time==False)
-#     weather_id: [0=Custom, 1=Sunny, 2=Cloudy, 3=LightFog, 4=HeavyFog, 5=LightRain, 6=HeavyRain, 7=LightSnow, 8=HeavySnow]
-if sim_inst_ID == 1:
-    weather_id = 1  # Sunny
-    time_of_day = 540  # 9am
-elif sim_inst_ID == 2:
-    weather_id = 1  # Sunny
-    time_of_day = 720  # 12pm
-elif sim_inst_ID == 3:
-    weather_id = 1  # Sunny
-    time_of_day = 900  # 3pm
-elif sim_inst_ID == 4:
-    weather_id = 1  # Sunny
-    time_of_day = 1080  # 6pm
-elif sim_inst_ID == 5:
-    weather_id = 3  # LightFog
-    time_of_day = 540  # 9am
-elif sim_inst_ID == 6:
-    weather_id = 3  # LightFog
-    time_of_day = 720  # 12pm
-elif sim_inst_ID == 7:
-    weather_id = 3  # LightFog
-    time_of_day = 900  # 3pm
-elif sim_inst_ID == 8:
-    weather_id = 3  # LightFog
-    time_of_day = 1080  # 6pm
-elif sim_inst_ID == 9:
-    weather_id = 6  # HeavyRain
-    time_of_day = 540  # 9am
-elif sim_inst_ID == 10:
-    weather_id = 6  # HeavyRain
-    time_of_day = 720  # 12pm
-elif sim_inst_ID == 11:
-    weather_id = 6  # HeavyRain
-    time_of_day = 900  # 3pm
-elif sim_inst_ID == 12:
-    weather_id = 6  # HeavyRain
-    time_of_day = 1080  # 6pm
-elif sim_inst_ID == 13:
-    weather_id = 8  # HeavySnow
-    time_of_day = 540  # 9am
-elif sim_inst_ID == 14:
-    weather_id = 8  # HeavySnow
-    time_of_day = 720  # 12pm
-elif sim_inst_ID == 15:
-    weather_id = 8  # HeavySnow
-    time_of_day = 900  # 3pm
-elif sim_inst_ID == 16:
-    weather_id = 8  # HeavySnow
-    time_of_day = 1080  # 6pm
+
+# Load simulation instance parameters from config file
+with open('config.json', 'r') as config_file:
+    config_data = json.load(config_file)
+    sim_config = config_data['simulation_instances'][sim_inst_ID - 1]
+
+weather_id = sim_config['weather_id']
+time_of_day = sim_config['time_of_day']
+model_name = sim_config['model']
 
 print("Simulation instance ID: {}".format(sim_inst_ID))
 print("    Weather ID: {}".format(weather_id))
 print("    Time of day: {} minutes from midnight".format(time_of_day))
+print("    Object Detection Model: {}".format(model_name))
+
+# AEB metrics logging
+csv_file = open(f'aeb_metrics_sim_inst_{sim_inst_ID}.csv', mode='w', newline='')
+csv_writer = csv.writer(csv_file)
+
+# Write the header row
+csv_writer.writerow([
+    "Timestamp", 
+    "Time of Day (min)", 
+    "Weather ID (#)", 
+    "Model", 
+    "Label", 
+    "Confidence (%)", 
+    "Size (px^2)", 
+    "AEB (bool)", 
+    "DTC (m)", 
+    "Throttle (%)", 
+    "Steering (%)", 
+    "Brake (%)", 
+    "Handbrake (%)", 
+    "PosX (m)", 
+    "PosY (m)", 
+    "PosZ (m)", 
+    "RotX (rad)", 
+    "RotY (rad)", 
+    "RotZ (rad)", 
+    "Collisions (#)"])
+csv_file.flush()
 
 # Load YOLO Model
-net = cv2.dnn.readNet("yolov3-tiny.weights", "yolov3-tiny.cfg")
+net = cv2.dnn.readNet(f"{model_name}.weights", f"{model_name}.cfg")
 
 # Load Classes
 with open("coco.names", "r") as f:
@@ -179,7 +170,7 @@ def bridge(sid, data):
         ########################################################################
 
         # Compute distance to collision and AEB trigger
-        DTC = np.linalg.norm(opencav_1.position - np.array([-242.16, -119.00, 341.91]))
+        DTC = np.round(np.linalg.norm(opencav_1.position - np.array([-242.16, -119.00, 341.91])), 2)
         AEB = 1 if (label == "car" and confidence >= 50 and size >= 1000) else 0
 
         ########################################################################
@@ -239,7 +230,7 @@ def bridge(sid, data):
             opencav_1.indicators_command = 0  # Vehicle indicators command [0 = Disabled, 1 = Left Turn Indicator, 2 = Right Turn Indicator, 3 = Hazard Indicators]
 
         # Verbose
-        print("DTC: {} m\tAEB: {}".format(np.round(DTC, 2), AEB == 1))
+        print("DTC: {} m\tAEB: {}".format(DTC, AEB == 1))
 
         ########################################################################
 
@@ -249,6 +240,31 @@ def bridge(sid, data):
         json_msg.update(
             opencav_1.generate_commands(verbose=False)
         )  # Append vehicle 1 message
+
+        # log current AEB metrics
+        csv_writer.writerow([
+            datetime.now(),
+            environment.time_of_day,
+            environment.weather_id,
+            "yolov3-tiny",
+            label,
+            confidence,
+            size,
+            AEB,
+            DTC,
+            opencav_1.throttle, 
+            opencav_1.steering,
+            opencav_1.brake,
+            opencav_1.handbrake,
+            opencav_1.position[0],
+            opencav_1.position[1],
+            opencav_1.position[2],
+            opencav_1.orientation_euler_angles[0],
+            opencav_1.orientation_euler_angles[1],
+            opencav_1.orientation_euler_angles[2], 
+            opencav_1.collision_count
+        ])
+        csv_file.flush()
 
         try:
             sio.emit("Bridge", data=json_msg)

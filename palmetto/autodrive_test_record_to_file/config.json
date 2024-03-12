@@ -1,0 +1,21 @@
+{
+  "simulation_instances": [
+    {"time_of_day": 540,  "weather_id":1, "model": "yolov3-tiny"},
+    {"time_of_day": 720,  "weather_id":1, "model": "yolov3-tiny"},
+    {"time_of_day": 900,  "weather_id":1, "model": "yolov3-tiny"},
+    {"time_of_day": 1080, "weather_id":1, "model": "yolov3-tiny"},
+    {"time_of_day": 540,  "weather_id":3, "model": "yolov3-tiny"},
+    {"time_of_day": 720,  "weather_id":3, "model": "yolov3-tiny"},
+    {"time_of_day": 900,  "weather_id":3, "model": "yolov3-tiny"},
+    {"time_of_day": 1080, "weather_id":3, "model": "yolov3-tiny"},
+    {"time_of_day": 540,  "weather_id":6, "model": "yolov3-tiny"},
+    {"time_of_day": 720,  "weather_id":6, "model": "yolov3-tiny"},
+    {"time_of_day": 900,  "weather_id":6, "model": "yolov3-tiny"},
+    {"time_of_day": 1080, "weather_id":6, "model": "yolov3-tiny"},
+    {"time_of_day": 540,  "weather_id":8, "model": "yolov3-tiny"},
+    {"time_of_day": 720,  "weather_id":8, "model": "yolov3-tiny"},
+    {"time_of_day": 900,  "weather_id":8, "model": "yolov3-tiny"},
+    {"time_of_day": 1080, "weather_id":8, "model": "yolov3-tiny"}
+  ]
+}
+  
