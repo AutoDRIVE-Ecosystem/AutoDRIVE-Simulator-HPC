@@ -5,7 +5,27 @@ document.addEventListener('DOMContentLoaded', function() {
   fetch('./config.json')
     .then(response => response.json())
     .then(data => {
-      const streams = data.streams;
+      const streams = data.simulation_instances;
+
+      // Function to convert time_of_day to am/pm format
+      function formatTime(minutes) {
+        const hours = Math.floor(minutes / 60);
+        const mins = minutes % 60;
+        const formattedTime = `${hours % 12 || 12}:${mins < 10 ? '0' : ''}${mins} ${hours < 12 ? 'am' : 'pm'}`;
+        return formattedTime;
+      }
+
+      // Mapping weather_id to weather description
+      const weatherDescriptions = {
+        1: 'Sunny',
+        2: 'Cloudy',
+        3: 'Light Fog',
+        4: 'Heavy Fog',
+        5: 'Light Rain',
+        6: 'Heavy Rain',
+        7: 'Light Snow',
+        8: 'Heavy Snow',
+      };
 
       // Function to add a stream to the grid
       function addStreamToGrid(stream, index) {
@@ -14,10 +34,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const title = document.createElement('div');
         title.className = 'stream-title';
-        title.textContent = `Simulation #${index + 1}` + 
-          (stream.description ? 
-            (stream.description.length <= 17 ? ` - ${stream.description}` : ` - ${stream.description.substring(0, 15)}...`) : 
-            '');
+        const time = formatTime(stream.time_of_day);
+        const weather = weatherDescriptions[stream.weather_id];
+        const model = stream.model;
+        title.textContent = `${weather} - ${time} - ${model}`;
         streamBox.appendChild(title);
 
         const videoWrapper = document.createElement('div');
