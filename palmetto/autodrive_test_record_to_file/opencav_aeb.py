@@ -246,7 +246,7 @@ def bridge(sid, data):
             datetime.now(),
             environment.time_of_day,
             environment.weather_id,
-            "yolov3-tiny",
+            model_name,
             label,
             confidence,
             size,
