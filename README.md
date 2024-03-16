@@ -1,21 +1,26 @@
-# AutoDRIVE Simulator Containerization
+# AutoDRIVE Simulator Containerization - Palmetto Tests
 
-This repository provides the necessary files to build a docker image for AutoDRIVE Simulator. 
+This branch contains various AutoDRIVE Simulator tests, which focus on AEB algorithm testing for OpenCAV.
 
-It is assumed that if the docker container is to take advantage of an NVIDIA GPU, the host machine has been properly configured by installing the necessary NVIDIA drivers, [Docker](https://docs.docker.com/engine/install/), and the  
-[NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/index.html). 
+They are meant to be run on Palmetto - Clemson's High-Performance Computing cluster. 
 
-## Building an AutoDRIVE Simulator Docker Image
+Each test is stored in its own sub-folder, under _palmetto/_. In order to reproduce any one of these tests, you need to upload the corresponding sub-folder to your Palmetto home folder, update the relevant paths within each script, and then submit the corresponding job script via Palmetto's QSUB scheduler:
 
-In order to build a docker image for AutoDRIVE Simulator, run
+    qsub autodrive_test.sh
 
-`docker build -t autodrive_simulator .`
+It is assumed that you have an installation of the proper version of AutoDRIVE Simulator. Please refer to the instructions below to setup a containerized installation of AutoDRIVE Simulator, by use of a sandboxed singularity container. 
 
-This will automatically pull the latest AutoDRIVE Simulator release version. To use a specific release version instead, use the VERSION command line argument. For instance, you may run
+All tests also rely on the **autodrive** conda environment being available to you on Palmetto. This environment can be re-created, as needed, from the file _palmetto/environment.yml_, using the following command 
 
-`docker build -t autodrive_simulator . --build-arg VERSION=Simulator-0.2.0`
+    conda env create -n autodrive -f environment.yml
 
-For testing purposes, you may want to use a local version of AutoDRIVE Simulator, as opposed to pulling a release version from github. In this case, 
-update the Dockerfile with the folder name containing your AutoDRIVE Simulator application, and run 
+## Containerized AutoDRIVE Simulator Installation on Palmetto 
 
-`docker build -t autodrive_simulator . --build-arg VERSION=local`
+In order perform the installation, you first need to procure a docker image for the correct version of AutoDRIVE Simulator. This image can be built using the instructions provided in this same repository, under the **docker** branch.
+
+After having uploaded this image to dockerhub, you may build a singularity sandbox for it under your Palmetto home folder, as follows 
+
+    cd ~
+    singularity build --sandbox autodrive_simulator/ docker://<user>/<image_name>
+
+
