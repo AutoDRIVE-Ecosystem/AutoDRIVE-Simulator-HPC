@@ -25,10 +25,6 @@ except ValueError:
     print("Please provide an integer argument for the simulation instance ID.")
     print("Usage: python opencav_aeb.py <sim_inst_ID>")
     sys.exit(1)
-if sim_inst_ID < 1 or sim_inst_ID > 16:
-    print("The simulation instance ID must be between 1 and 16.")
-    print("Usage: python opencav_aeb.py <sim_inst_ID>")
-    sys.exit(1)
 
 
 # Load simulation instance parameters from config file
