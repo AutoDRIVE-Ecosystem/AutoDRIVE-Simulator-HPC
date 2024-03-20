@@ -88,5 +88,5 @@ This branch, in conjunction with others such as the [palmetto](https://github.co
     ```
     
     <p align="center">
-    <img src="https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/blob/rzr-aeb/media/rzr-aeb-demo.gif"/>
+    <img src="https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/blob/opencav-aeb/media/opencav-aeb-demo.gif"/>
     </p>
