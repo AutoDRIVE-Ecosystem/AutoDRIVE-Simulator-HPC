@@ -1,5 +1,9 @@
 # AutoDRIVE Simulator: RZR AEB Function
 
+<p align="center">
+<img src="https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/blob/rzr-aeb/media/rzr-aeb-scenario.gif"/>
+</p>
+
 This branch hosts the necessary codebase to run a parameter sweep for verification and validation (V&V) of autonomous emergency braking (AEB) functionality of the [RZR digital twin](https://youtu.be/PLW1-sYW6Hw) using [AutoDRIVE Simulator](https://youtu.be/t0CgNR_LgrQ).
 
 This branch, in conjunction with others such as the [palmetto](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/tree/palmetto) and [palmetto-webviewer](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/tree/palmetto-webviewer) or the [rancher](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/tree/rancher) and [rancher-webviewer](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/tree/rancher-webviewer), can deploy the said V&V framework on the respective high-performance cloud computing resources.
@@ -77,8 +81,12 @@ This branch, in conjunction with others such as the [palmetto](https://github.co
      $ ./ AutoDRIVE\ Simulator.x86_64
      ```
 
-3. Execute the [`rzr_aeb`](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/blob/rzr-aeb/rzr_aeb.py) Python3 script to run the autonomous emergency braking (AEB) function with RZR, employing the AutoDRIVE Python API.
+2. Execute the [`rzr_aeb`](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/blob/rzr-aeb/rzr_aeb.py) Python3 script to run the autonomous emergency braking (AEB) function with RZR, employing the AutoDRIVE Python API.
     ```bash
     $ cd <path/to/rzr_aeb.py>
     $ python3 rzr_aeb.py
     ```
+
+    <p align="center">
+    <img src="https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/blob/rzr-aeb/media/rzr-aeb-demo.gif"/>
+    </p>
