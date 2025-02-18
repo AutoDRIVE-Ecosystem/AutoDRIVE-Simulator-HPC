@@ -1,4 +1,4 @@
-# AutoDRIVE Simulator: Palmetto 2 Cluster Deployments
+# AutoDRIVE Simulator: Palmetto Cluster Deployments
 
 This branch hosts resources for deployments of the AutoDRIVE Simulator on Palmetto 2 HPC cluster.
 
