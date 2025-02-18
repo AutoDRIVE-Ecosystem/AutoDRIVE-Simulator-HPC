@@ -17,15 +17,15 @@ RUN apt-key adv --fetch-keys "https://developer.download.nvidia.com/compute/cuda
         libvulkan1 \
         libc++1 \
         libc++abi1 \
+        vulkan-utils \
     && rm -rf /var/lib/apt/lists/*
 
 # Install AutoDRIVE Simulator app
 RUN cd /home && \
   if [ -z ${VERSION+x} ]; then \
-      curl -SL -o AutoDRIVE_Simulator.zip https://github.com/Tinker-Twins/AutoDRIVE/releases/download/Simulator-0.3.0/AutoDRIVE_Simulator_Linux.zip; \
-      unzip AutoDRIVE_Simulator.zip -d . && \
-      rm AutoDRIVE_Simulator.zip && \
-      mv AutoDRIVE* AutoDRIVE_Simulator; \
+      curl -SL -o AutoDRIVE_Simulator.zip https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/releases/download/opencav-aeb-0.1.0/AutoDRIVE.Simulator.zip; \
+      unzip AutoDRIVE_Simulator.zip -d AutoDRIVE_Simulator && \
+      rm AutoDRIVE_Simulator.zip; \
   elif [ "$VERSION" = "local" ]; then \
       echo "Using local AutoDRIVE_Simulator"; \
   else \
@@ -51,4 +51,3 @@ RUN mkdir /home/AutoDRIVE_Simulator/output
 WORKDIR /home/AutoDRIVE_Simulator
 RUN chmod +x /home/AutoDRIVE_Simulator/AutoDRIVE\ Simulator.x86_64
 RUN chmod +x /home/AutoDRIVE_Simulator/simulation_stream_recorder.sh
-
