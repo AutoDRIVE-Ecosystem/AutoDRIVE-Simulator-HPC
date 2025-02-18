@@ -6,7 +6,7 @@
 
 This branch hosts the necessary codebase to run a parameter sweep for verification and validation (V&V) of autonomous emergency braking (AEB) functionality of the [RZR digital twin](https://youtu.be/PLW1-sYW6Hw) using [AutoDRIVE Simulator](https://youtu.be/t0CgNR_LgrQ).
 
-This branch, in conjunction with others such as the [palmetto](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/tree/palmetto) and [palmetto-webviewer](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/tree/palmetto-webviewer) or the [rancher](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/tree/rancher) and [rancher-webviewer](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/tree/rancher-webviewer), can deploy the said V&V framework on the respective high-performance cloud computing resources.
+This branch, in conjunction with others, can deploy the said V&V framework on the respective high-performance cloud computing resources.
 
 ## SETUP
 
