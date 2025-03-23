@@ -1,0 +1,37 @@
+{
+  "simulation_instances": [
+    {"url": "../recordings/output_01.mp4", "time_of_day": 420,  "weather_id":1, "model": "yolov3"},
+    {"url": "../recordings/output_02.mp4", "time_of_day": 420,  "weather_id":2, "model": "yolov3"},
+    {"url": "../recordings/output_03.mp4", "time_of_day": 420,  "weather_id":3, "model": "yolov3"},
+    {"url": "../recordings/output_04.mp4", "time_of_day": 420,  "weather_id":4, "model": "yolov3"},
+    {"url": "../recordings/output_05.mp4", "time_of_day": 420,  "weather_id":5, "model": "yolov3"},
+    {"url": "../recordings/output_06.mp4", "time_of_day": 420,  "weather_id":6, "model": "yolov3"},
+    {"url": "../recordings/output_07.mp4", "time_of_day": 420,  "weather_id":7, "model": "yolov3"},
+    {"url": "../recordings/output_08.mp4", "time_of_day": 420,  "weather_id":8, "model": "yolov3"},
+    {"url": "../recordings/output_09.mp4", "time_of_day": 660,  "weather_id":1, "model": "yolov3"},
+    {"url": "../recordings/output_10.mp4", "time_of_day": 660,  "weather_id":2, "model": "yolov3"},
+    {"url": "../recordings/output_11.mp4", "time_of_day": 660,  "weather_id":3, "model": "yolov3"},
+    {"url": "../recordings/output_12.mp4", "time_of_day": 660,  "weather_id":4, "model": "yolov3"},
+    {"url": "../recordings/output_13.mp4", "time_of_day": 660,  "weather_id":5, "model": "yolov3"},
+    {"url": "../recordings/output_14.mp4", "time_of_day": 660,  "weather_id":6, "model": "yolov3"},
+    {"url": "../recordings/output_15.mp4", "time_of_day": 660,  "weather_id":7, "model": "yolov3"},
+    {"url": "../recordings/output_16.mp4", "time_of_day": 660,  "weather_id":8, "model": "yolov3"},
+    {"url": "../recordings/output_17.mp4", "time_of_day": 900,  "weather_id":1, "model": "yolov3"},
+    {"url": "../recordings/output_18.mp4", "time_of_day": 900,  "weather_id":2, "model": "yolov3"},
+    {"url": "../recordings/output_19.mp4", "time_of_day": 900,  "weather_id":3, "model": "yolov3"},
+    {"url": "../recordings/output_20.mp4", "time_of_day": 900,  "weather_id":4, "model": "yolov3"},
+    {"url": "../recordings/output_21.mp4", "time_of_day": 900,  "weather_id":5, "model": "yolov3"},
+    {"url": "../recordings/output_22.mp4", "time_of_day": 900,  "weather_id":6, "model": "yolov3"},
+    {"url": "../recordings/output_23.mp4", "time_of_day": 900,  "weather_id":7, "model": "yolov3"},
+    {"url": "../recordings/output_24.mp4", "time_of_day": 900,  "weather_id":8, "model": "yolov3"},
+    {"url": "../recordings/output_25.mp4", "time_of_day": 1140, "weather_id":1, "model": "yolov3"},
+    {"url": "../recordings/output_26.mp4", "time_of_day": 1140, "weather_id":2, "model": "yolov3"},
+    {"url": "../recordings/output_27.mp4", "time_of_day": 1140, "weather_id":3, "model": "yolov3"},
+    {"url": "../recordings/output_28.mp4", "time_of_day": 1140, "weather_id":4, "model": "yolov3"},
+    {"url": "../recordings/output_29.mp4", "time_of_day": 1140, "weather_id":5, "model": "yolov3"},
+    {"url": "../recordings/output_30.mp4", "time_of_day": 1140, "weather_id":6, "model": "yolov3"},
+    {"url": "../recordings/output_31.mp4", "time_of_day": 1140, "weather_id":7, "model": "yolov3"},
+    {"url": "../recordings/output_32.mp4", "time_of_day": 1140, "weather_id":8, "model": "yolov3"}
+  ]
+}
+  

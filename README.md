@@ -1,40 +1,24 @@
-# AutoDRIVE Simulator: Palmetto Cluster Deployments
+# AutoDRIVE Simulator WebViewer
 
-This branch hosts resources for deployments of the AutoDRIVE Simulator on Palmetto 2 HPC cluster.
+## Local Test
 
-## Submit Job to Palmetto 2 HPC Cluster
+1. Clone the [`webviewer`](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/tree/webviewer) branch of this GitHub repository and make it the working directory.
+    ```bash
+    git clone --single-branch --branch webviewer https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC.git
+    cd AutoDRIVE-Simulator-HPC
+    ```
 
-The overall project objective focuses on variability testing of the AEB functionality (SUT) for OpenCAV. Each test is stored in its own sub-folder, under the [`palmetto`](palmetto) directory. In order to reproduce any one of these tests, you will need to upload the corresponding sub-folder to your Palmetto 2 `home` folder, update the relevant paths within each script, and then submit the corresponding job script via Palmetto 2's `QSUB` scheduler:
-```bash
-qsub autodrive_test.sh
-```
-## Create `conda` Environment 
+2. Open up a terminal session in the current working directory and launch an HTTP server.
+    ```bash
+    python3 -m http.server 8000 # Linux
+    python -m http.server 8000 # Windows
+    ```
 
-All tests also rely on the **`autodrive`** conda environment being available to you on Palmetto 2. This environment can be recreated, as needed, from the file [`palmetto/environment.yml`](palmetto/environment.yml), using the following command:
-```bash
-conda env create -n autodrive -f environment.yml
-```
+3. Open up a web browser application (tested with Google Chrome) and visualize AutoDRIVE Simulator WebViewer.
+    ```bash
+    http://localhost:8000/webviewer/
+    ```
 
-## Build AutoDRIVE Simulator Image
+## HPC Deployment
 
-It is assumed that you have an installation of the required version of AutoDRIVE Simulator. Please refer to the instructions below to set up a containerized installation of AutoDRIVE Simulator by use of a sandboxed Singularity container. In order to perform the build process, you first need to procure a Docker image for AutoDRIVE Simulator. This image can either be built using the instructions provided in this same repository, under the [**`docker`**](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/tree/docker) branch, or the [**`autodriveecosystem/autodrive_sim_opencav`**](https://hub.docker.com/repository/docker/autodriveecosystem/autodrive_sim_opencav) pre-built image available on Docker Hub may be pulled and used instead.
-
-You may build a Singularity sandbox for it under your Palmetto 2 `home` folder using the following command:
-```bash
-cd ~
-singularity build --sandbox autodrive_simulator/ docker://autodriveecosystem/autodrive_sim_opencav
-```
-
-## Start Instance of the Sandbox
-
-Once the image is built and written to the destination, start the instance of the sandbox using the following command:
-```bash
-singularity instance start --nv -B $HOME,$TMPDIR autodrive_simulator/ inst1
-```
-
-## Run Instance of the Sandbox
-
-Run the started instance of the sandbox using the following command (the `writable` flag allows us to make changes within the container should we need to save these changes as images):
-```bash
-singularity run --writable --nv -B $HOME,$TMPDIR instance://inst1
-```
+Refer to the [`palmetto1`](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/tree/palmetto1), [`palmetto2`](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/tree/palmetto2), or [`rancher`](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/tree/rancher) branch of this GitHub repository for details and documentation on deploying parallellized simulation workloads in the respective HPC clusters with the live-streaming, interactive WebViewer interface.

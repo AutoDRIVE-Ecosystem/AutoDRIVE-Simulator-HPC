@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const videoGrid = document.getElementById('videoGrid');
 
   // Fetch stream URLs from the JSON config file asynchronously
-  fetch('./config.json')
+  fetch('../config.json')
     .then(response => response.json())
     .then(data => {
       const streams = data.simulation_instances;
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Mapping weather_id to weather description
       const weatherDescriptions = {
-        1: 'Sunny',
+        1: 'Clear',
         2: 'Cloudy',
         3: 'Light Fog',
         4: 'Heavy Fog',
@@ -60,21 +60,28 @@ document.addEventListener('DOMContentLoaded', function() {
       streams.forEach((stream, index) => {
         const { video } = addStreamToGrid(stream, index);
 
-        fetch(stream.url, { method: 'HEAD' })
-          .then(response => {
-            if (response.ok) {
-              if (Hls.isSupported()) {
-                const hls = new Hls();
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-                  hls.loadSource(stream.url);
-                });
-              } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = stream.url;
+        // Check if it's an mp4 video or HLS stream
+        if (stream.url.endsWith('.mp4')) {
+          // For MP4 files
+          video.src = stream.url;
+        } else {
+          // For HLS streams (.m3u8)
+          fetch(stream.url, { method: 'HEAD' })
+            .then(response => {
+              if (response.ok) {
+                if (Hls.isSupported()) {
+                  const hls = new Hls();
+                  hls.attachMedia(video);
+                  hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+                    hls.loadSource(stream.url);
+                  });
+                } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                  video.src = stream.url;
+                }
               }
-            }
-          })
-          .catch(error => console.error(`Error fetching stream ${stream.url}:`, error));
+            })
+            .catch(error => console.error(`Error fetching stream ${stream.url}:`, error));
+        }
       });
     })
     .catch(error => console.error("Failed to load config.json:", error));
