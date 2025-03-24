@@ -1,21 +1,23 @@
 #!/bin/bash
 
-#PBS -N autodrive_test
-#PBS -l select=1:ngpus=2:ncpus=16:mpiprocs=16:mem=120gb:interconnect=hdr,walltime=0:03:00
-#PBS -J 1-16
-#PBS -m abe
-#PBS -M giovanm@clemson.edu
-#PBS -j oe
+#SBATCH --job-name autodrive-test
+#SBATCH --gpus-per-node a100:1
+#SBATCH --cpus-per-task 16
+#SBATCH --mem 120g
 
-export TEST_DIR=/home/giovanm/autodrive_test_record_to_file/
-export SIMULATOR_DIR=/home/giovanm/autodrive_simulator_autoconnect_weather_time/
+#SBATCH --time 00:10:00
+#SBATCH --array=1-16
+
+
+export TEST_DIR=/home/nair4/autodrive/AutoDRIVE-Simulator-HPC/palmetto/autodrive_test_record_to_file
+export SIMULATOR_DIR=/home/nair4/autodrive/autodrive_simulator
 export XDG_RUNTIME_DIR=/tmp/runtime-dir
 
 # Record job performance metrics
 jobperf -record -w -rate 5s -record-db $TEST_DIR/autodrive_test_perf.db > /dev/null 2>&1 &
 
 # Activate the autodrive conda environment
-module add anaconda3/2022.05-gcc/9.5.0
+module add anaconda3/2023.09-0
 source activate autodrive
 
 # Run test instance
