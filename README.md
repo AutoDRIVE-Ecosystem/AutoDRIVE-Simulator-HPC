@@ -39,7 +39,7 @@ Run the started instance of the sandbox using the following command (the `writab
 singularity run --writable --nv -B $HOME,$TMPDIR instance://inst1
 ```
 
-## Setting up the terminal
+## Setting up the Terminal
 
 Install MobaXterm from here: https://mobaxterm.mobatek.net/
 
@@ -52,7 +52,7 @@ In advanced SSH settings, make sure X11-Forwarding is enabled.
 Click OK to create the session
 Use this session for working with AutoDRIVE on Palmetto2.
 
-## Running the simulator with an interactive job:
+## Running the Simulator with an Interactive Job:
 
 Run this command to start an interactive job with 2 k40 GPUs:
 ```bash
@@ -82,7 +82,7 @@ Run the simulator with:
 ./AutoDRIVE\ Simulator.x86_64
 ```
 
-## Running the tests:
+## Running the Tests:
 
 Take a look at interactive sessions for palmetto2: https://ondemand.rcd.clemson.edu/pun/sys/dashboard/batch_connect/sessions
 
@@ -92,8 +92,7 @@ There is also a Code Server (VSCode) that makes it easier to work with the file 
 Ensure that you have this repository cloned in your folder on palmetto2. If this is done already, you should see a folder called AutoDRIVE-Simulator-HPC.
 
 
-
-### No graphics
+### Headless (No-Graphics)
 
 Go to AutoDRIVE-Simulator-HPC/palmetto/autodrive_test_no_graphics. Delete any .csv, .log or .out files present. These files are created on test execution, so you shouldn’t see them the first time you try to execute the test.
 In the same folder, open autodrive_test.sh and edit it so the directory paths have your username in them instead.
@@ -106,7 +105,7 @@ sbatch autodrive_test.sh
 ```
 
 
-### Record to file
+### Record-to-File
 
 First go to autodrive_simulator/home/output and make sure that it’s empty. Delete any files present (this is where the recorded output of the previous execution will be stored).
 Go to AutoDRIVE-Simulator-HPC/palmetto/autodrive_test_record_to_file. Delete any .csv, .log or .out files present. 
@@ -126,7 +125,7 @@ Alternatively, if you find the output file in the the same place in VSCode throu
 
 
 
-### Web viewer
+### Live-Streaming
 
 Go to AutoDRIVE-Simulator-HPC/palmetto/autodrive_test_webviewer. Delete any .csv, .log or .out files present.
 In the same folder, open autodrive_test.sh and edit it so the directory paths have your username in them instead.
@@ -148,7 +147,13 @@ sbatch autodrive_test.sh
 ```
 
 
-## Some useful commands
+## Results
+
+![Results](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-HPC/blob/palmetto1/media/autodrive_opencav_palmetto.gif)
+
+
+
+## Some Useful Commands
 
 Show jobs:
 ```bash
@@ -180,13 +185,3 @@ Kill all jobs for your user
 ```bash
 scancel -u <username>
 ```
-
-
-
-
-
-
-
-
-
-
