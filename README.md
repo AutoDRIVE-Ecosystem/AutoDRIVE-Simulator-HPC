@@ -61,7 +61,11 @@ order to enable data collection from pods inside the cluster.
 - **[Kubernetes](Kubernetes)**: The `Kubernetes` directory contains the `YAML` files for deployments used in the cluster. 
 
 - **[Python](Python)**: The `Python` directory holds all the necessary scripts to control simulations running in the cluster, using
-[`automation_module.py`](Python/automation_module.py). Most variables can be updated using the [`config.ini`](Python/config.ini) file. 
+[`automation_module.py`](Python/automation_module.py). Most variables can be updated using the [`config.ini`](Python/config.ini) file.
+
+## RESULTS
+
+![Results](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-HPC/blob/rancher/Media/autodrive_rzr_rancher.gif)
 
 ## KNOWN ISSUES
 
