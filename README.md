@@ -136,6 +136,8 @@ To deploy the Webviewer, launch another interactive job and in the same folder, 
 ```bash
 bash deploy_webviewer.sh
 ```
+![image](https://github.com/user-attachments/assets/5d70e5a2-6e83-4ac7-85e6-b3c8e5b2cc7b)
+
 In palmetto desktop, go to http://node0352.palmetto.clemson.edu:8000/webviewer/
 (replace node0352 with whatever node your job is running on).
 Here, you will see the live feed of the test.
