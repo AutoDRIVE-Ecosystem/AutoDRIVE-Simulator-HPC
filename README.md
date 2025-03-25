@@ -38,3 +38,7 @@ Run the started instance of the sandbox using the following command (the `writab
 ```bash
 singularity run --writable --nv -B $HOME,$TMPDIR instance://inst1
 ```
+
+## Results
+
+![Results](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-HPC/blob/palmetto1/media/autodrive_opencav_palmetto.gif)
