@@ -90,3 +90,21 @@ This branch, in conjunction with others, can deploy the said V&V framework on th
     <p align="center">
     <img src="https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-Simulator-HPC/blob/opencav-aeb/media/opencav-aeb-demo.gif"/>
     </p>
+
+## CITATION
+
+#### [Digital Twins in the Cloud: A Modular, Scalable and Interoperable Framework for Accelerating Verification and Validation of Autonomous Driving Solutions](https://arxiv.org/abs/2505.12661)
+```bibtex
+@proceedings{DTs-in-Cloud-2025,
+author = {Samak, Tanmay and Samak, Chinmay and Martino, Giovanni and Nair, Pranav and Krovi, Venkat},
+title = {Digital Twins in the Cloud: A Modular, Scalable and Interoperable Framework for Accelerating Verification and Validation of Autonomous Driving Solutions},
+volume = {Volume 5: 21st IEEE/ASME International Conference on Mechatronic and Embedded Systems and Applications (MESA); 49th Mechanisms and Robotics Conference (MR)},
+series = {International Design Engineering Technical Conferences and Computers and Information in Engineering Conference},
+pages = {V005T08A071},
+year = {2025},
+month = {08},
+doi = {10.1115/DETC2025-163799},
+url = {https://doi.org/10.1115/DETC2025-163799}
+}
+```
+This work has been accepted at **2025 ASME International Design Engineering Technical Conferences & Computers and Information in Engineering Conference (IDETC-CIE).** The publication can be found in [ASME Digital Collection](https://doi.org/10.1115/DETC2025-163799).
