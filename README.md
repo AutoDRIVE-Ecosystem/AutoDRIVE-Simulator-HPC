@@ -50,11 +50,11 @@ Install MobaXterm from here: https://mobaxterm.mobatek.net/
 In sessions, create a new session and select SSH.
 ![image](https://github.com/user-attachments/assets/b4d416a4-e690-473f-9ae5-5834c9eaee7d)
 
-In remote host, enter: slogin.palmetto.clemson.edu
-Make sure Specify username is checked and enter your username.
-In advanced SSH settings, make sure X11-Forwarding is enabled.
-Click OK to create the session
-Use this session for working with AutoDRIVE on Palmetto2.
+- In `Remote host`, enter: `slogin.palmetto.clemson.edu`
+- Make sure `Specify username` is checked and enter your `username`.
+- In `Advanced SSH settings`, ensure that `X11 Forwarding` is enabled.
+- Click `OK` to create the session
+- Use this session for working with AutoDRIVE on Palmetto2.
 
 ### Running the Simulator with an Interactive Job:
 
@@ -99,6 +99,7 @@ Ensure that you have this repository cloned in your folder on palmetto2. If this
 
 Go to AutoDRIVE-Simulator-HPC/palmetto/autodrive_test_no_graphics. Delete any .csv, .log or .out files present. These files are created on test execution, so you shouldn’t see them the first time you try to execute the test.
 In the same folder, open autodrive_test.sh and edit it so the directory paths have your username in them instead.
+
 ![image](https://github.com/user-attachments/assets/ab3af061-92c5-467f-8d42-b1726d6875bf)
 
 In your MobaXterm SSH session, go to AutoDRIVE-Simulator-HPC/palmetto/autodrive_test_no_graphics
@@ -109,11 +110,11 @@ sbatch autodrive_test.sh
 
 #### Record-to-File
 
-First go to autodrive_simulator/home/output and make sure that it’s empty. Delete any files present (this is where the recorded output of the previous execution will be stored).
-Go to AutoDRIVE-Simulator-HPC/palmetto/autodrive_test_record_to_file. Delete any .csv, .log or .out files present. 
+First, go to `autodrive_simulator/home/output` and make sure that it’s empty. Delete any files present (this is where the recorded output of the previous execution will be stored).
+Go to `AutoDRIVE-Simulator-HPC/palmetto/autodrive_test_record_to_file`. Delete any `.csv`, `.log` or `.out` files present. 
 In the same folder, open autodrive_test.sh and edit it so the directory paths have your username in them instead.
 
-In your MobaXterm SSH session, go to AutoDRIVE-Simulator-HPC/palmetto/autodrive_test_record_to_file
+In your MobaXterm SSH session, go to `AutoDRIVE-Simulator-HPC/palmetto/autodrive_test_record_to_file`
 Submit the batch job with:
 ```bash
 sbatch autodrive_test.sh
