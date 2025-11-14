@@ -175,6 +175,11 @@ Kill job (for a batch job, only enter the primary job id (without underscore)):
 scancel <job ID>
 ```
 
+Kill all jobs for your user
+```bash
+scancel -u <username>
+```
+
 ## RESULTS
 
 ![Results](https://github.com/AutoDRIVE-Ecosystem/AutoDRIVE-HPC/blob/palmetto1/media/autodrive_opencav_palmetto.gif)
@@ -196,8 +201,3 @@ url = {https://doi.org/10.1115/DETC2025-163799}
 }
 ```
 This work has been accepted at **2025 ASME International Design Engineering Technical Conferences & Computers and Information in Engineering Conference (IDETC-CIE).** The publication can be found in [ASME Digital Collection](https://doi.org/10.1115/DETC2025-163799).
-
-Kill all jobs for your user
-```bash
-scancel -u <username>
-```
