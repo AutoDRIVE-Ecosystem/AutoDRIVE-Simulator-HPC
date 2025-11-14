@@ -2,7 +2,7 @@
 
 This branch hosts resources for deployments of the AutoDRIVE Simulator on Palmetto HPC cluster.
 
-## SETUP AND USAGE
+## SETUP
 
 ### Submit Job to Palmetto HPC Cluster
 
@@ -27,14 +27,16 @@ cd ~
 singularity build --sandbox autodrive_simulator/ docker://autodriveecosystem/autodrive_sim_opencav
 ```
 
-### Start Instance of the Sandbox
+## USAGE
+
+### Start an Instance of the Sandbox
 
 Once the image is built and written to the destination, start the instance of the sandbox using the following command:
 ```bash
 singularity instance start --nv -B $HOME,$TMPDIR autodrive_simulator/ inst1
 ```
 
-### Run Instance of the Sandbox
+### Run an Instance of the Sandbox
 
 Run the started instance of the sandbox using the following command (the `writable` flag allows us to make changes within the container should we need to save these changes as images):
 ```bash
